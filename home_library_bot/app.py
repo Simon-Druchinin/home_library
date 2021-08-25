@@ -4,6 +4,7 @@ from loader import dp
 import middlewares, filters, handlers
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
+from utils.db_api.database import create_db
 
 
 async def on_startup(dispatcher):
@@ -11,7 +12,8 @@ async def on_startup(dispatcher):
     await set_default_commands(dispatcher)
 
     # Уведомляет про запуск
-    await on_startup_notify(dispatcher)
+    # await on_startup_notify(dispatcher)
+    await create_db()
 
 
 if __name__ == '__main__':

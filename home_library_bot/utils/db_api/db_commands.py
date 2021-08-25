@@ -1,8 +1,7 @@
 from typing import List
 
-from utils.db_api import Book
-from utils.db_api.database import db
-
+from utils.db_api.models import Book
+from sqlalchemy.sql.expression import Delete
 
 # Creating a new Book instance function. Takes all arguments from Book
 async def add_book(**kwargs):
@@ -11,7 +10,7 @@ async def add_book(**kwargs):
 
 #get all books
 async def get_all_books() -> List[Book]:
-    book = await Book.gino.all()
+    book = await Book.query.gino.all()
     return book
 
 #get borrowed books
@@ -25,3 +24,7 @@ async def get_borrowed_books() -> List[Book]:
 async def get_book(book_id) -> Book:
     book = await Book.query.where(Book.id == book_id).gino.first()
     return book
+
+#delete book
+async def delete_book(book_id):
+    await Book.delete.where(Book.id == book_id).gino.status()

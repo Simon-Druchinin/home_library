@@ -8,7 +8,7 @@ class Book(db.Model):
     query: sql.Select
 
     #book id
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    id = Column(Integer, Sequence('books_id_seq'), primary_key=True)
 
     #name, author, photo and debtor
     name = Column(String(50))
@@ -19,4 +19,5 @@ class Book(db.Model):
     def __repr__(self):
         return f"""
 Книга № {self.id} - "{self.name}"
+Автор: {self.author}
 Должник: {self.debtor}"""
